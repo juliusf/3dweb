@@ -5,9 +5,9 @@
 // main. The argument being passed - "tutorial" -
 // is the id of the canvas element on the html page.
 
-c3dl.addMainCallBack(canvasMain, "tutorial");
-c3dl.addModel("duck.dae");
-var duck;
+c3dl.addMainCallBack(canvasMain, "ship");
+c3dl.addModel("Apple.dae");
+var ship;
 
 // The program main
 function canvasMain(canvasName){
@@ -34,19 +34,19 @@ function canvasMain(canvasName){
  // will contain a imported
  // model of something to put
  // in the scene.
- duck = new c3dl.Collada();
+ ship = new c3dl.Collada();
 
  // If the path is already parsed
  // (as it is in this case)
  // then the model is automatically retrieved
  // from a collada manager.
- duck.init("duck.dae");
-
+ ship.init("Apple.dae");
+ship.setTexture("stone.png");
  // Give the duck a bit of a spin on y
- duck.setAngularVel(new Array(0.0, -0.001, 0.00));
+ ship.setAngularVel(new Array(0.0, -0.001, 0.00));
 
  // Add the object to the scene
- scn.addObjectToScene(duck);
+ scn.addObjectToScene(ship);
 
  // Create a camera
  var cam = new c3dl.FreeCamera();
@@ -56,7 +56,7 @@ function canvasMain(canvasName){
  // move 200 to the right
  // move 300 up
  // move 500 units out
- cam.setPosition(new Array(200.0, 1500.0, 500.0));
+ cam.setPosition(new Array(10.0, 10.0, 10.0));
 
  // Point the camera.
  // Here it is pointed at the same location as
