@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <title>Flowers</title>
+    <link rel="stylesheet" type="text/css" href="x3dom.css" />
+  </head>
+       
+  <body>
+    <h1>Flowers</h1>
+  
+    <p class="case">
+    <X3D xmlns="http://www.web3d.org/specifications/x3d-namespace" id="spheres" showStat="true" x="0px" y="0px" width="400px" height="400px">
+      <scene>
+        <inline nameSpaceName="test1" url='flower_in_vase.x3d' ></inline>
+      </scene>
+    </X3D>
+    </p>
+    <script type="text/javascript" src="x3dom.js"></script>
+    <br></br>
+    <input type="button" name="red" value="Red"
+      onclick="onRedClick()"></input>
+    <input type="button" name="red" value="Orange"
+      onclick="onOrangeClick()"></input>
+
+    <script type="text/javascript">
+      function onRedClick()
+      {
+        document.getElementById("test1__petals").setAttribute('diffuseColor', '1 0 0');
+        document.getElementById("test1__petals").setAttribute('specularColor', '1 0 0');
+        document.getElementById("test1__petals").setAttribute('emissiveColor', '0.25 0 0');
+      }
+
+      function onOrangeClick()
+      {
+        document.getElementById("test1__petals").setAttribute('diffuseColor', '1.000 0.546 0.000');
+        document.getElementById("test1__petals").setAttribute('specularColor', '0.018 0.018 0.018');
+        document.getElementById("test1__petals").setAttribute('emissiveColor', '0.237 0.129 0.000');
+      }
+    </script>
+  </body>
+</html>
