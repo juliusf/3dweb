@@ -78,22 +78,7 @@ function yevtpos(evt)
     return 2 * (evt.clientY / evt.target.height) - 1;
 }
 
-//This function is called when the user moves the scroll-wheel on the mouse
-//Depending on the direction of the action, the camera will either get
-// closer to or farther from the orbit point.
-function mouseScroll(evt) {
-	var cam = scn.getCamera();
-	if(-evt.detail*ZOOM_SENSITIVITY < 0)
-		{
-			cam.goFarther(-1 * -evt.detail*ZOOM_SENSITIVITY);
-		}
-		
-		// towards screen
-		else
-		{
-			cam.goCloser(-evt.detail*ZOOM_SENSITIVITY);
-		}
-}
+
 
 //This function is called whenever a key is released.
 //If the key released was the space-bar, the camera will switch
@@ -139,7 +124,7 @@ function canvasMain(canvasName){
 
 queue.init("queue.dae")
 pool.setTexture("billard_black_8.png");
-pool.setPosition(new Array(0.0,2.0,0.0))
+pool.setPosition([0.0,2.0,0.0])
 table.setTexture("felt.png")
  // Give the duck a bit of a spin on y
  
@@ -150,36 +135,40 @@ table.setTexture("felt.png")
  scn.addObjectToScene(queue);
 
  // Create a camera
-  var cam = new c3dl.OrbitCamera();
+  cam = new c3dl.OrbitCamera();
   cam.setFarthestDistance(1000);
   cam.setClosestDistance(20);	
   cam.setOrbitPoint(pool.getPosition());
-  cam.setDistance(150);
+  cam.setDistance(55);
   scn.setCamera(cam);
 
 
 // Add some lights
- var spot = new c3dl.SpotLight();
- spot.setPosition(new Array(0.0, 150.0, 0.0));
- spot.setDirection(new Array(0.0, -1.0,0.0));
+ spot = new c3dl.SpotLight();
+ spot.setPosition([0.0, 150.0, 0.0]);
+ spot.setDirection([0.0,-1.0,0.0]);
  spot.setSpecular([0.5,0.5,0.5,1.0]);
  spot.setDiffuse([0.2,0.2,0.2,1.0]);
- spot.setAmbient([0.2,0.2,0.2,1.0]);
+ spot.setAmbient([0.8,0.8,0.8,1.0]);
  spot.setCutoff(180);
  spot.setExponent(1)
  spot.setOn(true);
 
- scn.addLight(spot);
+ //scn.addLight(spot);
 
- /*var spec = new c3dl.DirectionalLight();
- spec.setName('spec');
- spec.setDirection([0.0,0.0,0.0]);
- spec.setSpecular([0.3,0.3,0.3,0.6])
- spec.setOn(true);
- scn.addLight(spec); */
-  scn.setAmbientLight([0,0,0,0]);
+ //scn.setAmbientLight([0,0,0,0]);
  scn.setMouseCallback(mouseUp,mouseDown, mouseMove);
  // Start the scene
  scn.startScene();
  }
+
+
+}
+
+function onRedClick(){
+	pool.setTexture("billard_red_15.png");
+}
+
+function onBlackClick(){
+	pool.setTexture("billard_black_8.png");
 }
