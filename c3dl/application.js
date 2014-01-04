@@ -7,7 +7,6 @@
 
 c3dl.addMainCallBack(canvasMain, "pool");
 c3dl.addModel("queue.dae")
-c3dl.addModel("table.dae")
 var pool;
 var table;
 var queue;
