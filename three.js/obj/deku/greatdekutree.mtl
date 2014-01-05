@@ -1,0 +1,148 @@
+# Blender3D MTL File: greatdekutree.blend
+# Material Count: 28
+newmtl Material.011_5381C1FC_c.bmp
+Ns 0.000000
+Ka 0.000000 0.000000 0.000000
+Kd 0.437500 0.437500 0.490625
+Ks 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd ground.png
+
+
+
+
+
+newmtl Material.011_mustache_and_eyebrows
+Ns 0.000000
+Ka 0.000000 0.000000 0.000000
+Kd 0.437500 0.437500 0.490625
+Ks 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd mustache and eyebrows.png
+
+
+newmtl Material.011_54AF94B5_c.bmp
+Ns 0.000000
+Ka 0.000000 0.000000 0.000000
+Kd 0.437500 0.437500 0.490625
+Ks 0.000000 0.000000 0.000000
+Ni 1.000000
+d 0.500000
+illum 2
+map_Kd road.png
+
+
+newmtl Material.011_22A2901B_c.bmp
+Ns 0.000000
+Ka 0.000000 0.000000 0.000000
+Kd 0.437500 0.437500 0.490625
+Ks 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd treestop.png
+
+
+newmtl Material.011_308C80FE_c.bmp
+Ns 0.000000
+Ka 0.000000 0.000000 0.000000
+Kd 0.437500 0.437500 0.490625
+Ks 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd leaves.png
+
+
+newmtl Material.011_road.png
+Ns 0.000000
+Ka 0.000000 0.000000 0.000000
+Kd 0.437500 0.437500 0.490625
+Ks 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd road.png
+
+
+newmtl Material.011_Road_end.png
+Ns 0.000000
+Ka 0.000000 0.000000 0.000000
+Kd 0.437500 0.437500 0.490625
+Ks 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_d Road end.png
+
+
+newmtl Material.011_59EAE89F_c.bmp
+Ns 0.000000
+Ka 0.000000 0.000000 0.000000
+Kd 0.437500 0.437500 0.490625
+Ks 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd deku tree skin.png
+
+
+
+
+newmtl Material.011_5FDEFAE8_c.bmp
+Ns 0.000000
+Ka 0.000000 0.000000 0.000000
+Kd 0.437500 0.437500 0.490625
+Ks 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd treesbottom.png
+
+
+
+newmtl Material.011_59FC0537_c.bmp
+Ns 0.000000
+Ka 0.000000 0.000000 0.000000
+Kd 0.437500 0.437500 0.490625
+Ks 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd deku tree skin.png
+
+
+
+newmtl Material.011_vines.png
+Ns 0.000000
+Ka 0.000000 0.000000 0.000000
+Kd 0.437500 0.437500 0.490625
+Ks 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd vines.png
+
+
+
+
+
+newmtl Material.011_5E5D2C5B_c.bmp
+Ns 0.000000
+Ka 0.000000 0.000000 0.000000
+Kd 0.437500 0.437500 0.490625
+Ks 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd Wall.bmp
+
+
+
+
+
+
