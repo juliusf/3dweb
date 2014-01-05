@@ -1,0 +1,209 @@
+<!doctype html>
+<html>
+	<head>
+		<title>three.js demo</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		
+			
+		<script src="js/three.js"></script>
+		<script src="js/stats.min.js"></script>
+		<script src="js/Detector.js"></script>
+
+
+		<script src="js/threex/THREEx.FullScreen.js"></script>
+		<script src="js/threex/THREEx.WindowResize.js"></script>
+		<script src="js/threex.dragpancontrols.js"> </script>
+		<script src="js/loaders/MTLLoader.js"></script>
+        <script src="js/loaders/OBJMTLLoader.js"></script>
+        <script src="js/FirstPersonControls.js"></script
+
+		<link  href="css/main.css" rel="stylesheet"/>
+	</head>
+<body>
+	
+    	<div id="container"></div>
+	
+	<div id="info">
+		<div class="top">
+three.js demo by JuliusF
+		</div>
+		<div class="bottom" id="inlineDoc" >
+			- <i>p</i> for screenshot
+		</div> 
+	</div> 
+
+	<script type="text/javascript">
+		var stats, scene, renderer;
+		var camera, cameraControl;
+		var particles, particleSystem, particleCount;
+		var kokiri;
+		var clock;
+
+
+		if( !init() )	animate();
+
+		// init the scene
+		function init(){
+
+			if( Detector.webgl ){
+				renderer = new THREE.WebGLRenderer({
+					antialias		: true,	
+					preserveDrawingBuffer	: true	
+				});
+				renderer.setClearColorHex( 0x000000, 1 );
+
+			}else{
+				renderer	= new THREE.CanvasRenderer();
+			}
+			renderer.setSize( window.innerWidth, window.innerHeight );
+			document.getElementById('container').appendChild(renderer.domElement);
+
+			
+			stats = new Stats();
+			stats.domElement.style.position	= 'absolute';
+			stats.domElement.style.bottom	= '0px';
+			document.body.appendChild( stats.domElement );
+
+			// create a scene
+			scene = new THREE.Scene();
+			//create a new clock
+			 clock = new THREE.Clock();
+			// put a camera in the scene
+			camera = new THREE.PerspectiveCamera(35, window.innerWidth / window.innerHeight, 1, 10000 );
+			camera.position.set(0, 0, 5);
+			//add first person controls
+			controls = new THREE.FirstPersonControls( camera );
+            controls.movementSpeed = 120;
+            controls.lookSpeed = 0.05;
+            controls.noFly = false;
+            controls.lookVertical = true;
+
+
+			// transparently support window resize
+			THREEx.WindowResize.bind(renderer, camera);
+			
+			if( THREEx.FullScreen.available() ){
+				THREEx.FullScreen.bindKey();		
+				document.getElementById('inlineDoc').innerHTML	+= "- <i>f</i> for fullscreen";
+			}
+
+			createParticles()
+			loadObjects()
+
+					
+
+            // create a point light
+			var pointLight =
+			  new THREE.PointLight(0xFFFFFF);
+
+			// set its position
+			pointLight.position.x = 0;
+			pointLight.position.y = 250;
+			pointLight.position.z = 50;
+
+			// add to the scene
+			scene.add(pointLight);
+		}
+
+		// animation loop
+		function animate() {
+
+			// loop on request animation loop
+			// - it has to be at the begining of the function
+			// - see details at http://my.opera.com/emoller/blog/2011/12/20/requestanimationframe-for-smart-er-animating
+			requestAnimationFrame( animate );
+
+			particleSystem.rotation.y += 0.0001;
+			 
+			 
+			  var pCount = particleCount;
+			  while (pCount--) {
+			  	    var particle = particles.vertices[pCount];
+      
+			    
+			    particle.y += Math.random() * .05;
+			    particle.x += Math.random() * .05;
+			    particle.z += Math.random() * .05;
+
+
+			  }
+
+			  // flag to the particle system
+			  // that we've changed its vertices.
+			  particleSystem.
+			    geometry.
+			    __dirtyVertices = true;  
+
+
+			// do the render
+			render();
+
+			// update stats
+			stats.update();
+			
+		}
+
+		// render the scene
+		function render() {
+
+			// update camera controls
+			//cameraControls.update();
+			controls.update( clock.getDelta() );
+			// actually render the scene
+			renderer.render( scene, camera );
+		}
+
+		function createParticles()
+		{
+				particleCount = 2000,
+    			particles = new THREE.Geometry(),
+    			pMaterial = new THREE.ParticleBasicMaterial({
+      				color: 0xFFFFFF,
+     				size: 20,
+     				map: THREE.ImageUtils.loadTexture("images/particle.png"),
+     				blending: THREE.AdditiveBlending,
+     				transparent: true
+   				 });
+
+
+    			for (var p = 0; p < particleCount; p++) 
+    			{
+  					var pX = Math.random() * 500 - 250,
+      					pY = Math.random() * 500 - 250,
+					    pZ = Math.random() * 500 - 250,
+					    particle = new THREE.Vertex(
+					        new THREE.Vector3(pX, pY, pZ)
+					     );
+					  // add it to the geometry
+					  particles.vertices.push(particle);
+				}
+
+					// create the particle system
+					    particleSystem = new THREE.ParticleSystem(
+					    particles,
+					    pMaterial);
+					   particleSystem.sortParticles = true;
+					
+					scene.add( particleSystem );
+
+		}
+
+		function loadObjects()
+		{
+			var loader = new THREE.OBJMTLLoader();
+            loader.load( 'obj/YoungLink.obj', 'obj/YoungLink.mtl', function ( object ) {
+                            object.position.y = - 80;
+                            object.position.z = - 150;
+                            scene.add( object );
+                    } );
+            
+            loader.load('obj/kokiri/Kokiri Forest.obj', 'obj/kokiri/Kokiri Forest.mtl', function ( object ) {
+            	 object.position.y = - 80;
+                 object.position.z = - 150;
+                 kokiri = object; scene.add( object );
+            } );
+		}
+	</script>
+</body>
+</html>
