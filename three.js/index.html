@@ -16,9 +16,9 @@
 		<script src="js/threex.dragpancontrols.js"> </script>
 		<script src="js/loaders/MTLLoader.js"></script>
         <script src="js/loaders/OBJMTLLoader.js"></script>
-        <script src="js/FirstPersonControls.js"></script
+        <script src="js/FirstPersonControls.js"></script>
 
-		<link  href="css/main.css" rel="stylesheet"/>
+		<link href="css/main.css" rel="stylesheet"/>
 	</head>
 <body>
 	
@@ -35,11 +35,12 @@ three.js demo by JuliusF
 
 	<script type="text/javascript">
 		var stats, scene, renderer;
-		var camera, cameraControl;
+		var camera, cameraControl, controls;
 		var particles, particleSystem, particleCount;
 		var kokiri;
 		var clock;
-		var gl;
+
+
 
 
 		if( !init() )	animate();
@@ -76,13 +77,16 @@ three.js demo by JuliusF
 			 clock = new THREE.Clock();
 			// put a camera in the scene
 			camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 10000 );
-			camera.position.set(0, 0, 5);
+			camera.position.set(156, -498, -63);
+			//camera.rotateOnAxis(new THREE.Vector3(0,1,0), 1.8);
+
+			
 			//add first person controls
 			controls = new THREE.FirstPersonControls( camera );
             controls.movementSpeed = 120;
-            controls.lookSpeed = 0.25;
+            controls.lookSpeed = 0.15;
             controls.noFly = true;
-            controls.lookVertical = true;
+            controls.lookVertical = false;
 
 
 			// transparently support window resize
@@ -217,7 +221,12 @@ three.js demo by JuliusF
                 object.position.z = - 140.05449;
                 object.scale.set(0.25,0.25,0.25)
                 object.rotation.y += 110 * Math.PI / 180; 
-                scene.add( object );} ); 
+                scene.add( object )
+               	camera.lookAt(object.position);
+
+               	//controls.freeze = true;
+                } );
+                  
 
 
             

@@ -148,12 +148,13 @@ table.setTexture("felt.png")
  spot.setDirection([0.0,-1.0,0.0]);
  spot.setSpecular([0.5,0.5,0.5,1.0]);
  spot.setDiffuse([0.2,0.2,0.2,1.0]);
- spot.setAmbient([0.8,0.8,0.8,1.0]);
+ //spot.setAmbient([0.8,0.8,0.8,1.0]);
  spot.setCutoff(180);
  spot.setExponent(1)
  spot.setOn(true);
 
- //scn.addLight(spot);
+
+ scn.addLight(spot);
 
  //scn.setAmbientLight([0,0,0,0]);
  scn.setMouseCallback(mouseUp,mouseDown, mouseMove);

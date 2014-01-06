@@ -126,9 +126,10 @@ THREE.FirstPersonControls = function ( object, domElement ) {
 
 			this.mouseX = event.pageX - this.viewHalfX;
 			this.mouseY = event.pageY - this.viewHalfY;
+			this.freeze = false;
 
 		} else {
-
+			this.freeze = false;
 			this.mouseX = event.pageX - this.domElement.offsetLeft - this.viewHalfX;
 			this.mouseY = event.pageY - this.domElement.offsetTop - this.viewHalfY;
 
