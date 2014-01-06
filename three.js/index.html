@@ -38,7 +38,7 @@ three.js demo by JuliusF
 		var camera, cameraControl, controls;
 		var particles, particleSystem, particleCount;
 		var kokiri;
-		var clock;
+		var clock, text2;
 
 
 
@@ -68,6 +68,7 @@ three.js demo by JuliusF
 			stats.domElement.style.position	= 'absolute';
 			stats.domElement.style.bottom	= '0px';
 			document.body.appendChild( stats.domElement );
+			createDebugText();
 
 			// create a scene
 			scene = new THREE.Scene();
@@ -86,7 +87,7 @@ three.js demo by JuliusF
             controls.movementSpeed = 120;
             controls.lookSpeed = 0.15;
             controls.noFly = true;
-            controls.lookVertical = false;
+            controls.lookVertical = true;
 
 
 			// transparently support window resize
@@ -126,7 +127,7 @@ three.js demo by JuliusF
 			// - see details at http://my.opera.com/emoller/blog/2011/12/20/requestanimationframe-for-smart-er-animating
 			requestAnimationFrame( animate );
 
-			particleSystem.rotation.y += 0.0001;
+			//particleSystem.rotation.y += 0.0001;
 			 
 			 
 			  var pCount = particleCount;
@@ -134,9 +135,19 @@ three.js demo by JuliusF
 			  	    var particle = particles.vertices[pCount];
       
 			    
-			    particle.y += Math.random() * .1;
-			    particle.x += Math.random() * .1;
-			    particle.z += Math.random() * .1;
+
+			    //particle.y += Math.random() * .1;
+			    particle.x += Math.random() * .1 * particle.movementVector.x;
+			    particle.z += Math.random() * .1 * particle.movementVector.z;
+			    particle.y += Math.random() * .1 * particle.movementVector.y;
+			    if (particle.x >= 1000 || particle.x <= 100 || particle.y >= -250 || particle.y <= -600 || particle.z >= 1000 || particle.z <= -250)
+			    {
+			    	particle.x = Math.random() * 500 - 1;
+			   
+			    	particle.y = Math.random() * 500 - 600;
+			   
+			    	particle.z = Math.random() * 500 - 300;
+			    }
 
 			    //particle.material.needsUpdate = true;
 
@@ -150,7 +161,7 @@ three.js demo by JuliusF
 			    __dirtyVertices = true;  
 
 			  particles.colorsNeedUpdate = true;
-
+			 //text2.innerHTML = "X:" + camera.position.x.toString() + " Y: " + camera.position.y.toString() + " Z: " + camera.position.z.toString();
 			// do the render
 			render();
 
@@ -198,6 +209,7 @@ three.js demo by JuliusF
 					        new THREE.Vector3(pX, pY, pZ)
 					     );
 					  // add it to the geometry
+					  particle.movementVector = new THREE.Vector3(plusOrMinus(), plusOrMinus(), plusOrMinus());
 					  particles.vertices.push(particle);
 				}
 
@@ -239,7 +251,26 @@ three.js demo by JuliusF
 
 		}
 
+		function plusOrMinus()
+		{
+			return Math.random() < 0.5 ? -1 : 1;
+		}
 
+		function createDebugText()
+		{
+			text2 = document.createElement('div');
+			text2.style.position = 'absolute';
+			//text2.style.zIndex = 1;    // if you still don't see the label, try uncommenting this
+			text2.style.width = 100;
+			text2.style.height = 100;
+			text2.style.backgroundColor = "blue";
+			//text2.innerHTML = "hi there!";
+			text2.style.top = 20 + 'px';
+			text2.style.left = 20 + 'px';
+			document.body.appendChild(text2);
+		}
+
+		
 		
 	</script>
 </body>
