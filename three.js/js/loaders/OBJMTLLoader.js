@@ -35,7 +35,11 @@ THREE.OBJMTLLoader.prototype = {
 
 							var material = materialsCreator.create( object.material.name );
 
-							if ( material ) object.material = material;
+							if ( material )
+							{
+							 object.material = material;
+							 //material.transparent = true;
+							}
 
 						}
 

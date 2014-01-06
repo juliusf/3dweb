@@ -39,6 +39,7 @@ three.js demo by JuliusF
 		var particles, particleSystem, particleCount;
 		var kokiri;
 		var clock;
+		var gl;
 
 
 		if( !init() )	animate();
@@ -49,9 +50,11 @@ three.js demo by JuliusF
 			if( Detector.webgl ){
 				renderer = new THREE.WebGLRenderer({
 					antialias		: true,	
-					preserveDrawingBuffer	: true	
+					preserveDrawingBuffer	: true,
+					premultipliedAlpha : false,
+					alpha : false
 				});
-				renderer.setClearColorHex( 0x000000, 1 );
+				renderer.setClearColorHex( 0xC8C896, 1 );
 
 			}else{
 				renderer	= new THREE.CanvasRenderer();
@@ -67,16 +70,18 @@ three.js demo by JuliusF
 
 			// create a scene
 			scene = new THREE.Scene();
+			//create fog
+			scene.fog = new THREE.FogExp2( 0xC8C896, 0.0015 );
 			//create a new clock
 			 clock = new THREE.Clock();
 			// put a camera in the scene
-			camera = new THREE.PerspectiveCamera(35, window.innerWidth / window.innerHeight, 1, 10000 );
+			camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 10000 );
 			camera.position.set(0, 0, 5);
 			//add first person controls
 			controls = new THREE.FirstPersonControls( camera );
             controls.movementSpeed = 120;
-            controls.lookSpeed = 0.05;
-            controls.noFly = false;
+            controls.lookSpeed = 0.25;
+            controls.noFly = true;
             controls.lookVertical = true;
 
 
@@ -87,9 +92,9 @@ three.js demo by JuliusF
 				THREEx.FullScreen.bindKey();		
 				document.getElementById('inlineDoc').innerHTML	+= "- <i>f</i> for fullscreen";
 			}
-
-			createParticles()
-			loadObjects()
+			loadObjects();
+			createParticles();
+			
 
 					
 
@@ -98,12 +103,15 @@ three.js demo by JuliusF
 			  new THREE.PointLight(0xFFFFFF);
 
 			// set its position
-			pointLight.position.x = 0;
-			pointLight.position.y = 250;
-			pointLight.position.z = 50;
+			pointLight.position.x = 325;
+			pointLight.position.y = -500;
+			pointLight.position.z = - 140;
 
 			// add to the scene
 			scene.add(pointLight);
+
+			var ambientLight = new THREE.AmbientLight(0x000044);
+      		scene.add(ambientLight);
 		}
 
 		// animation loop
@@ -122,9 +130,11 @@ three.js demo by JuliusF
 			  	    var particle = particles.vertices[pCount];
       
 			    
-			    particle.y += Math.random() * .05;
-			    particle.x += Math.random() * .05;
-			    particle.z += Math.random() * .05;
+			    particle.y += Math.random() * .1;
+			    particle.x += Math.random() * .1;
+			    particle.z += Math.random() * .1;
+
+			    //particle.material.needsUpdate = true;
 
 
 			  }
@@ -135,6 +145,7 @@ three.js demo by JuliusF
 			    geometry.
 			    __dirtyVertices = true;  
 
+			  particles.colorsNeedUpdate = true;
 
 			// do the render
 			render();
@@ -152,26 +163,33 @@ three.js demo by JuliusF
 			controls.update( clock.getDelta() );
 			// actually render the scene
 			renderer.render( scene, camera );
+
+
 		}
 
 		function createParticles()
 		{
-				particleCount = 2000,
+				particleCount = 75,
     			particles = new THREE.Geometry(),
     			pMaterial = new THREE.ParticleBasicMaterial({
-      				color: 0xFFFFFF,
+      				color: 0xFFCCCC,
      				size: 20,
      				map: THREE.ImageUtils.loadTexture("images/particle.png"),
+     				needsUpdate: true,
      				blending: THREE.AdditiveBlending,
+					//depthTest: false,
+					depthWrite: false,
+					opacity: 1.0,
+					premultipliedAlpha : false,
      				transparent: true
    				 });
 
 
     			for (var p = 0; p < particleCount; p++) 
     			{
-  					var pX = Math.random() * 500 - 250,
-      					pY = Math.random() * 500 - 250,
-					    pZ = Math.random() * 500 - 250,
+  					var pX = Math.random() * 500 - 1,
+      					pY = Math.random() * 500 - 600,
+					    pZ = Math.random() * 500 - 300,
 					    particle = new THREE.Vertex(
 					        new THREE.Vector3(pX, pY, pZ)
 					     );
@@ -191,19 +209,29 @@ three.js demo by JuliusF
 
 		function loadObjects()
 		{
+		
 			var loader = new THREE.OBJMTLLoader();
             loader.load( 'obj/YoungLink.obj', 'obj/YoungLink.mtl', function ( object ) {
-                            object.position.y = - 80;
-                            object.position.z = - 150;
-                            scene.add( object );
-                    } );
+                object.position.x =  300.5752;
+                object.position.y = - 517.216642;
+                object.position.z = - 140.05449;
+                object.scale.set(0.25,0.25,0.25)
+                object.rotation.y += 110 * Math.PI / 180; 
+                scene.add( object );} ); 
+
+
             
-            loader.load('obj/kokiri/Kokiri Forest.obj', 'obj/kokiri/Kokiri Forest.mtl', function ( object ) {
+            loader.load('obj/deku/greatdekutree.obj', 'obj/deku/greatdekutree.mtl', function ( object ) {
             	 object.position.y = - 80;
                  object.position.z = - 150;
-                 kokiri = object; scene.add( object );
-            } );
+                 object.scale.set(100,100,100); 
+                 scene.add( object );
+            } ); 
+
 		}
+
+
+		
 	</script>
 </body>
 </html>
