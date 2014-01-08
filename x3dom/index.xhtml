@@ -7,10 +7,10 @@
     <title>Flowers</title>
     <link rel="stylesheet" type="text/css" href="x3dom.css" />
   </head>
-       
+
   <body>
     <h1>Flowers</h1>
-  
+
     <p class="case">
     <X3D xmlns="http://www.web3d.org/specifications/x3d-namespace" id="spheres" showStat="true" x="0px" y="0px" width="400px" height="400px">
       <scene>
@@ -22,8 +22,13 @@
     <br></br>
     <input type="button" name="red" value="Red"
       onclick="onRedClick()"></input>
-    <input type="button" name="red" value="Orange"
+    <input type="button" name="orange" value="Orange"
       onclick="onOrangeClick()"></input>
+    <br></br>
+    <input type="button" name="enableRot" value="enable rotation"
+      onclick="onRotEnableClick()"></input>
+    <input type="button" name="disableRot" value="disable rotation"
+      onclick="onRotDisableClick()"></input>
 
     <script type="text/javascript">
       function onRedClick()
@@ -38,6 +43,16 @@
         document.getElementById("test1__petals").setAttribute('diffuseColor', '1.000 0.546 0.000');
         document.getElementById("test1__petals").setAttribute('specularColor', '0.018 0.018 0.018');
         document.getElementById("test1__petals").setAttribute('emissiveColor', '0.237 0.129 0.000');
+      }
+
+      function onRotEnableClick()
+      {
+          document.getElementById("test1__interpolator").setAttribute('keyValue', '0 0 1 0, 0 0 1 3.14, 0 0 1 6.28');
+      }
+
+      function onRotDisableClick()
+      {
+          document.getElementById("test1__interpolator").setAttribute('keyValue', '0 0 0 0, 0 0 0 3.14, 0 0 0 6.28');
       }
     </script>
   </body>

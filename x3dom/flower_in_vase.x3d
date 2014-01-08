@@ -33,7 +33,7 @@
 							<ImageTexture DEF="WETHWOO3_TIF"
 							              url='"C:/Documents and Settings/Nathan Peck/My Documents/Blender/Textures 3ds/WETHWOO3.TIF" "WETHWOO3.TIF"'
 							              />
-							<TextureTransform 
+							<TextureTransform
 							                  translation="0.000000 0.000000"
 							                  scale="1.000000 1.000000"
 							                  rotation="0.000000"
@@ -69,7 +69,7 @@
 			            ambientIntensity="0.0000"
 			            color="1.0000 1.0000 0.5717"
 			            intensity="0.5714"
-			            radius="30.0000" 
+			            radius="30.0000"
 			            location="0.0000 -0.0000 -0.0000"
 			            />
 		</Transform>
@@ -83,11 +83,11 @@
 			           scale="1.000000 1.000000 1.000000"
 			           rotation="0.000000 0.000000 0.000000 0.000000"
 			           >
-				<Group DEF="Cube_002">
+        <Group DEF="Cube_002">
 					<Shape>
 						<Appearance>
 							<ImageTexture USE="WETHWOO3_TIF" />
-							<TextureTransform 
+							<TextureTransform
 							                  translation="0.000000 0.000000"
 							                  scale="1.000000 1.000000"
 							                  rotation="0.000000"
@@ -123,7 +123,7 @@
 			            ambientIntensity="0.0000"
 			            color="1.0000 1.0000 0.5717"
 			            intensity="0.5714"
-			            radius="30.0000" 
+			            radius="30.0000"
 			            location="0.0000 -0.0000 -0.0000"
 			            />
 		</Transform>
@@ -170,7 +170,7 @@
 			            ambientIntensity="0.0000"
 			            color="1.0000 1.0000 0.5717"
 			            intensity="0.5714"
-			            radius="30.0000" 
+			            radius="30.0000"
 			            location="-0.0000 -0.0000 0.0000"
 			            />
 		</Transform>
@@ -205,6 +205,7 @@
 							            />
 						</IndexedFaceSet>
 					</Shape>
+          <Transform DEF="rotThing">
 					<Shape>
 						<Appearance>
 							<Material DEF="Goldenrod"
@@ -224,6 +225,7 @@
 							<Coordinate USE="coords_Cylinder_001" />
 						</IndexedFaceSet>
 					</Shape>
+          </Transform>
 					<Shape>
 						<Appearance>
 							<Material DEF="GreenOlive_001"
@@ -257,5 +259,10 @@
 			           fieldOfView="0.858"
 			           />
 		</Transform>
+    <timeSensor DEF='clock' cycleInterval='8' loop='true'></timeSensor>
+    <orientationInterpolator id='interpolator' DEF='spinThings' key='0 0.5 1' keyValue='0 0 0 0, 0 0 0 3.14, 0 0 0 6.28'></orientationInterpolator>
+
+    <ROUTE fromNode='clock' fromField='fraction_changed' toNode='spinThings' toField='set_fraction'></ROUTE>
+    <ROUTE fromNode='spinThings' fromField='value_changed' toNode='rotThing' toField='set_rotation'></ROUTE>
 	</Scene>
 </X3D>
