@@ -89,7 +89,6 @@ three.js demo by JuliusF. Models Taken from <a href="http://www.models-resource.
             controls.noFly = true;
             controls.lookVertical = true;
 
-
 			// transparently support window resize
 			THREEx.WindowResize.bind(renderer, camera);
 			
@@ -270,8 +269,17 @@ three.js demo by JuliusF. Models Taken from <a href="http://www.models-resource.
 			document.body.appendChild(text2);
 		}
 
-		
-		
+
+
+	(document).onkeypress = function(e){
+    console.log(e.keyCode)
+    if (e.keyCode == 99) { 
+    	pMaterial.color.setHSL( Math.random(), 1.0, 0.6 );
+
+		}
+       return false;
+    }
+
 	</script>
 </body>
 </html>
